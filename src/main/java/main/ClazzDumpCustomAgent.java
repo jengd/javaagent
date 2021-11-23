@@ -1,5 +1,7 @@
 package main;
 
+import com.readTxt;
+
 import java.io.*;
 import java.lang.instrument.ClassFileTransformer;
 import java.lang.instrument.Instrumentation;
@@ -78,55 +80,18 @@ public class ClazzDumpCustomAgent implements ClassFileTransformer {
     private boolean needExportClass(String className) {
         String[] str = className.split("/");
         String packageName = str[0];
-        List<String> list = new ArrayList();
 
-        // todo list 这里改为需要导出的文件夹/文件名称
-        String a = "a";
-        String b = "b";
-        String c = "c";
-        String client = "client";
-        String configs = "configs";
-        String constants = "constants";
-        String d = "d";
-        String scripts = "scripts";
-        String server = "server";
-        String tools = "tools";
-        String Test = "Test";
-        list.add(a);
-        list.add(b);
-        list.add(c);
-        list.add(client);
-        list.add(configs);
-        list.add(constants);
-        list.add(d);
-        list.add(scripts);
-        list.add(server);
-        list.add(tools);
-        list.add(Test);
-        String callback = "callback";
-        String com = "com";
-        String config = "config";
-        String mode = "mode";
-        String okhttp3 = "okhttp3";
-        String okio = "okio";
-        String org = "org";
-        String util = "util";
-        list.add(callback);
-        list.add(com);
-        list.add(config);
-        list.add(okhttp3);
-        list.add(okio);
-        list.add(org);
-        list.add(util);
-        list.add(mode);
+        // todo list (needExportClass.txt)改为需要导出的文件夹/文件名称
+        List<String> list = readTxt.ReadExportPackname();
 
         //写文件
         SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
+
         String dateString = sdf2.format(new Date());
-
         // todo list 这里改为对应文件名称
+        String recordLog = "D:/file/" + dateString + ".txt";
 
-        File file = new File("D:/file/" + dateString + ".txt");
+        File file = new File(recordLog);
         BufferedWriter out = null;
         String conent1 = "className is: " + className;
         String conent2 = "packageName is: " + packageName;
